@@ -10,6 +10,6 @@ To find what you want in your code you simply have to create a Annotator based o
 ## Docs 
 
 
-The documentation is available at https://devlens.github.io. 
+The documentation is available at http://soma-smart.github.io/devlens-docs/ .
 
 
