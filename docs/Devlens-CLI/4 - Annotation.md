@@ -1,5 +1,5 @@
 
-### Annotation
+# Annotation
 
 The next step is to "catch" the node you want. Binaries in the release comes with an 'annotators/' folder already filled with some example.
 

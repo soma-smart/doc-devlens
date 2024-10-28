@@ -1,4 +1,4 @@
-### Query
+# Query
 
 After the analyze , you can query your Annotations directly from you bash using `query` command.
 

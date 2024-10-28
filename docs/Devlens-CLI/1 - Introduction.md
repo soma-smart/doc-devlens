@@ -1,6 +1,5 @@
-# DevLens CLI
+# Introduction
 
-## The CLI
 
 The search engine that help you find code pattern.
 

@@ -13,10 +13,10 @@ const config = {
   // favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'http://soma-smart.github.io/devlens-docs/',
+  url: 'http://soma-smart.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/devlens-docs/',
+  baseUrl: '/docs/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -34,32 +34,20 @@ const config = {
   },
 
   presets: [
+    
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
           sidebarPath: './sidebars.js',
+          routeBasePath: '/', 
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -83,11 +71,11 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/soma-smart/devlens_cli',
+            href: 'https://github.com/soma-smart/',
             label: 'GitHub',
             position: 'right',
           },
