@@ -12,7 +12,7 @@ Devlens can analyze your whole project and tell you exactly in which file and wh
 Maybe you want to be sure you are using only one DB environnement in your project: You can query every DB env import with devlens, it will give you a clear output of every DB env of your project.
 
 
-## 3 easy steps
+## 4 easy steps
 
 Devlens only needs 4 steps to show you what you want to know about your code.
 
