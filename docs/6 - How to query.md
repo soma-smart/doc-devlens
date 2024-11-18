@@ -1,4 +1,4 @@
-# How to Query
+# How to query
 
 **DEVLENS** provide a easy and nice way to query and check results directly through in your terminal.
 After the analyze, you can query your Annotations directly from you terminal :

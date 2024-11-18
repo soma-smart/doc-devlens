@@ -6,8 +6,8 @@
 Start by exporting your access keys of Dataiku into your terminal:
 
 ```bash
-export DATAIKU_URL_soma=https://dataiku.soma-smart.cloud
-export DATAIKU_API_KEY_soma=yourkey
+export DATAIKU_URL=https://yourdataikuurl.cloud
+export DATAIKU_API_KEY=yourkey
 ```
 
 

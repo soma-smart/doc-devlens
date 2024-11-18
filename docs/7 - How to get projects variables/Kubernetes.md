@@ -3,7 +3,7 @@
 
 ## Kubernetes secrets 
 
-Devlens can retreive your kubernetes secrets on a aimed namespace by giving your `values.yaml` and your kubeconfig path in your bash command.
+**Devlens** can retreive your kubernetes secrets on a aimed namespace by giving your `values.yaml` and your kubeconfig path in your bash command.
 
 
 The `values.yaml` file (or any other config Helm file you specifies) need to have two key so Devlens can find your secrets : `namespace` and `secret`.
