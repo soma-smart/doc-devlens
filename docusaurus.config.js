@@ -8,6 +8,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  plugins: [require.resolve("docusaurus-lunr-search")],
   title: "Devlens - The search engine that help you find code pattern.",
   tagline: "The search engine that help you find code pattern.",
 

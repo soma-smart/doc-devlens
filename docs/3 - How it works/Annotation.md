@@ -42,6 +42,6 @@ You just have to use the `findAll()` on each node you want to filter until you g
 
 The last part is to create an Annotation for each match you have. You can choose to not store a value in the Annotation by passing `None` to the annotation.
 
-Executing a `checkf` or a `checkd` will result on the creation of Annotations and the filling of the database.
+Executing a `check` will result on the creation of Annotations and the filling of the database.
 
 ![SQLite Annotation](/../static/img/howitwork/db.png?raw=true "SQLite Annotation")

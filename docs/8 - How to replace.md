@@ -17,3 +17,8 @@ Just by using the `interactive mode` you can specify the annotator that will "ca
 You can instantly see the change right after:
 
 ![after](/../static/img/replace/after.png?raw=true "after")
+
+
+You will also have a new table create in database to identifies every change done on your project:
+
+![db](/../static/img/replace/db.png?raw=true "db")
