@@ -16,12 +16,12 @@ const config = {
   url: "http://soma-smart.github.io/",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/devlens-docs/",
+  baseUrl: "/doc-devlens/",
   favicon: "/img/favicon.ico",
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "soma-smart", // Usually your GitHub org/user name.
-  projectName: "devlens-docs", // Usually your repo name.
+  projectName: "doc-devlens", // Usually your repo name.
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 

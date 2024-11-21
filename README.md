@@ -14,6 +14,6 @@ Maybe you want to be sure you are using only one DB environnement in your projec
 ## Docs 
 
 
-The documentation is available at https://soma-smart.github.io/devlens-docs/.
+The documentation is available at https://soma-smart.github.io/doc-devlens/.
 
 
