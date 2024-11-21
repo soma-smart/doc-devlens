@@ -20,7 +20,7 @@ Devlens is a tool that scan your code to retreive pattern, and store their value
 
 
 
-## 4 steps of the "I'm not going to search my whole code manually"
+## 4 easy steps to search what you want
 
 **Devlens** will do all the work for you. You just have to tell it what to look for and it will get every occurence of the pattern. 
 
