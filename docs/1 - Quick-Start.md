@@ -16,7 +16,17 @@ slug: /
 
 The search engine that help you find code pattern.
 
-Devlens is a tool that scan your code to retreive pattern, and store their value and location in a Database. 
+**Devlens** is a tool that scan your code to retreive pattern, and store their value and location in a Database. 
+
+**DevLens** can help you write query like the following ones :
+
+ - List the most used datasets in all your projects regardless of the technology used
+ - Assess the quality of your code (code coverage, code smells, duplication, dead code, bad practices, complexity, etc.)
+ - Search for specific code patterns (for example, search for all the code that uses a deprecated function)
+
+It can be used manually via the terminal interface to get interactive feedback or as a service (for example to be integrated in a CI/CD pipeline).
+
+For more example, see [Example page](/docs/2-%20Example.md).
 
 
 
@@ -39,17 +49,7 @@ Devlens is a tool that scan your code to retreive pattern, and store their value
 
 **-Step 4:** Enjoy the result.
 
-Imagine you are doing a full upgrade of your application and need to be sure you swapped every old version of a function;
 
-**Devlens** can analyze your whole project and tell you exactly in which file and which lines are your old code.
-
-Maybe you want to be sure you are using only one DB environnement in your project: You can query every DB env import with **Devlens**, it will give you a clear output of every DB env of your project.
-
-You found something you want to change globally in your project ? use the **Replace** to modify you whole projet with values you want.
-
-**Devlens** can be integrated seamless in your developpement process since it also work directly  in your **CI**! 
-
-It also integrate a Dataiku connection to retreive easily your project from any dataiku instance !
 
 
 ## Binaries
@@ -61,3 +61,9 @@ Binaries comes with our initials annotators:
 https://github.com/soma-smart/devlens_cli/releases
 
 
+
+
+
+
+
+ 

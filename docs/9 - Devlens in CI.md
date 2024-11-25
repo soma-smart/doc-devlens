@@ -30,7 +30,7 @@ jobs:
         - name: Download Devlens release
         run: |
             version="0.3.0"
-            curl -s https://api.github.com/repos/soma-smart/devlens_cli/releases/latest \
+            curl -s https://api.github.com/repos/soma-smart/dev-devlens-cli/releases/latest \
             | jq -r '.assets[] | select(.name | contains("ubuntu-latest-3.12.tar.gz")) | .browser_download_url' \
             | xargs -n 1 curl -L -o devlens.tar.gz
 
