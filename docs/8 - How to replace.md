@@ -27,7 +27,7 @@ You will also have a new table create in database to identifies every change don
 
 
 
-### Replacement Statement
+### replacement statement
 
 The replacement Statement take 3 parameter separated by `||`.
 

@@ -54,6 +54,10 @@ To see the classic mode you can simply execute :
 ```bash
 ./devlens query "SELECT ...."
 ```
+# Replace 
+```bash
+python main.py replace downloads/ "SELECT * FROM annotation WHERE name='Table_Env'" --replace "value || 'replacement' || logic"
+```
 ## Make DEVLENS globally available
 
 If you want to use devlens anywhere on your machine, you might want to make it available globally :

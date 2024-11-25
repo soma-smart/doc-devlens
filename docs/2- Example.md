@@ -149,4 +149,84 @@ It also integrate a Dataiku connection to retreive easily your project from any 
 ## Replace 'HDFS' to 'S3'
 
 
+Imagine you want to migrate from HDFS to S3 in your project by changing every occurence of 'hdfs://' by 's3a://':
+
+```python
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+
+spark = SparkSession.builder.getOrCreate()
+
+expected_df = (
+    spark.read.parquet("hdfs://HDFS_SERVER:3543/finance/pib/expected/")
+    .withColumn("year", F.year("date"))
+    .withColumnRenamed("pib", "expected_pib")
+)
+actual_df = (
+    spark.read.csv("hdfs://HDFS_SERVER:3543/finance/pib/actual/")
+    .withColumn("year", F.year("date"))
+)
+///....
+
+spark.stop()
+```
+An annotator can find every spark.read you have:
+
+```python 
+from annotators.common.abstract_annotator import AbstractAnnotator
+from annotators.common.annotation import Annotation
+from annotators.common.search import findAll
+
+from antlr4 import ParserRuleContext
+
+
+class SparkReadParquetAnnotator(AbstractAnnotator):
+
+    def parse(self, ast: ParserRuleContext):
+        spark_read = findAll(
+            ast, "Primary", filters={"primary": "spark.read.parquet"}
+        )
+        spark_read += findAll(
+            ast, "Primary", filters={"primary": "spark.read.csv"}
+        )
+        arguments = findAll(spark_read, "Arguments")
+        strings = findAll(arguments, "Strings")
+
+        for expr in strings:
+            yield Annotation(
+                name="spark_read", value=self.getText(expr), context=expr
+            )
+```
+
+
+Then with the **Devlens** replace command, you can change every occurence directly in your terminal 
+
+
+![replace](/../static/img/example/replace.png?raw=true "replace")
+
+
+Then you can check on your code:
+
+```python
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+
+spark = SparkSession.builder.getOrCreate()
+
+
+expected_df = (
+    spark.read.parquet("s3a://finance/pib/expected/")
+    .withColumn("year", F.year("date"))
+    .withColumnRenamed("pib", "expected_pib")
+)
+actual_df = (
+    spark.read.parquet("s3a://finance/pib/actual/")
+    .withColumn("year", F.year("date"))
+)
+```
+
+
+
 
