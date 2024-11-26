@@ -24,7 +24,7 @@ It can be used manually via the terminal interface to get interactive feedback o
 
 Want to change values you found in your project? **Devlens** makes it possible with the replace functionality. Query what you want to change, give the new value, and our CLI will take care of the modification in each file.
 
-For more examples, see [Examples page](/docs/2-%20Example.md).
+For more examples, see [Examples page](/docs/2-%20Examples.md).
 
 ## 4 easy steps to search what you want
 
