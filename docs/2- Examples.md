@@ -1,10 +1,14 @@
-# Example 
+# Examples
 
-## Don't use SELECT * 
+## Don't use SELECT *
 
-If you want to be sure there isn't any `SELECT *` in your whole project , an annotator can find every occurence of Wildcard in your code:
+```sql
+#example.sql
+insert into DEV_DB_AAAA.SC_PARAM_AAAA.TABLE_AAAA 
+(SELECT * FROM REC_DB_BBBB.SC_PARAM_AAAA.TABLE_AAAA)
+```
 
-
+To be sure there isn't any `SELECT *` in your whole project, an annotator can find every occurrence of Wildcard in your code:
 ```python
 from annotators.common.abstract_annotator import AbstractAnnotator
 from annotators.common.search import findAll
@@ -27,24 +31,19 @@ class SparkSQLSelectWildcard(AbstractAnnotator):
 ```
 
 You can then query your database to check if this annotator found any `SELECT *`:
-```SQL
-SELECT path FROM annotation WHERE name= "Select_Wildcard"
+```sql
+SELECT path 
+FROM annotation 
+WHERE name= "Select_Wildcard"
 ```
 \
 ![select-wildcard-query](/../static/img/example/select-wildcard-query.png?raw=true "select-wildcard-query")
 
+## Don't use different DB environments in the same file
 
-
-
-
-
-## Don't use different DB environnement in the same file
-
-
-
-
-If you want to be sure the same environnement is used in each file you can create a annotator that will get every db env of your project:
-```python 
+Be sure the same environment is used in each file. You can create an annotator that will get every DB environment of your project:
+```python
+#example.py
 from annotators.common.abstract_annotator import AbstractAnnotator
 from annotators.common.search import findAll
 from annotators.common.annotation import Annotation
@@ -72,17 +71,53 @@ class SparkSQLTableEnv(AbstractAnnotator):
 ```
 
 Then you can query the **Devlens** DB:
-```SQL
-SELECT path FROM annotation WHERE name = 'Table_Env' AND name IN (SELECT name FROM annotation WHERE name = 'Table_Env' GROUP BY name HAVING COUNT(DISTINCT value) > 1)ORDER BY path;
+
+```sql
+SELECT path 
+FROM annotation 
+WHERE name = 'Table_Env' 
+AND name IN (
+    SELECT name 
+    FROM annotation 
+    WHERE name = 'Table_Env' 
+    GROUP BY name 
+    HAVING COUNT(DISTINCT value) > 1)
+ORDER BY path;
 ```
-\`
+*This query will display every file where there is more than one environment used.*
+
+\
 ![env-diff-query](/../static/img/example/env-diff-query.png?raw=true "env-diff-query")
-
-
 
 ## Use right dependencies
 
-An annotator can retreive every dependencies importation in a project:
+It's hard to list every dependency used in a project:
+```python
+#example.py
+import dataiku
+
+from pyspark import SparkContext
+from pyspark.sql import SQLContext
+
+from snowflake.snowpark import Session
+from snowflake.snowpark.functions import *
+from snowflake.snowpark.exceptions import SnowparkSQLException
+import snowflake_package
+from snowflake.snowpark.types import *
+
+sc = SparkContext.getOrCreate()
+sqlContext = SQLContext(sc)
+
+USER = str(Path.home()).split("/")[-1]
+try:
+    connection = snowflake_package.get_connection(
+        key_path=f"{Path.home()}/.secure/{USER}_snowflake.pem", warehouse="WH_TEST")
+except:
+    connection = snowflake_package.get_connection(
+        key_path=f"{Path.home()}/.secure/snowflake.p8", warehouse="WH_TEST")
+```
+
+An annotator can retrieve every dependency importation in a project:
 
 ```python
 from annotators.common.abstract_annotator import AbstractAnnotator
@@ -110,49 +145,68 @@ class PythonFromImportAnnotator(AbstractAnnotator):
                 )
 ```
 
-You can then query the **Devlens** DB :
+You can then query the **Devlens** DB:
 ```sql
-SELECT value FROM annotation WHERE name = "From_Import";
+SELECT value 
+FROM annotation 
+WHERE name = "From_Import";
 ```
 \
 ![from-import-query](/../static/img/example/from-import-query.png?raw=true "from-import-query")
 
+## Retrieve your Environment variable directly from your Kubernetes secrets
 
-## Retrieve your Environnement variable directly from your Kubernetes secrets
+**Devlens** is able to retrieve your environment variable automatically just by giving your config file path:
 
-**Devlens** is able to retreive your environnement variable automatically just by giving your config file path:
+*You will need a [kubeconfig file](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) and a helm [deployment file](https://helm.sh/docs/chart_template_guide/values_files/)*.
 
 ![kube-analyze](/../static/img/example/kube-analyze.png?raw=true "kube-analyze")
 
+An annotator finding every os.getenv will help you display your Kubernetes secrets:
+```python
+from annotators.common.abstract_annotator import AbstractAnnotator
+from annotators.common.search import findAll
+from annotators.common.annotation import Annotation
+
+from antlr4 import ParserRuleContext
+
+
+class PythonGetenvAnnotator(AbstractAnnotator):
+    def parse(self, ast: ParserRuleContext):
+
+        getenv_calls = findAll(ast, "Primary", filters={"primary": "os.getenv"})
+        arguments = findAll(getenv_calls, "Arguments")
+        strings = findAll(arguments, "Strings")
+
+        for match in strings:
+            yield Annotation(name="os_getenv", value=self.getText(match), context=match)
+```
 
 Then you can query the **Devlens** DB:
 
 ```sql
-SELECT path,value FROM annotation WHERE name='os.getenv';
+SELECT path, value 
+FROM annotation 
+WHERE name='os.getenv';
 ```
 
 ![kube-query](/../static/img/example/kube-query.png?raw=true "kube-query")
 
-
-Imagine you are doing a full upgrade of your application and need to be sure you swapped every old version of a function;
+For example, when you are doing a full upgrade of your application and need to be sure you swapped every old version of a function;
 
 **Devlens** can analyze your whole project and tell you exactly in which file and which lines are your old code.
 
+You found something you want to change globally in your project? Use the **Replace** to modify your whole project with values you want.
 
-You found something you want to change globally in your project ? use the **Replace** to modify you whole projet with values you want.
+**Devlens** can be integrated seamlessly into your development process since it also works directly in your **CI**!
 
-**Devlens** can be integrated seamless in your developpement process since it also work directly  in your **CI**! 
-
-It also integrate a Dataiku connection to retreive easily your project from any dataiku instance !
-
+It also integrates a Dataiku connection to retrieve easily your project from any Dataiku instance!
 
 ## Replace 'HDFS' to 'S3'
 
-
-Imagine you want to migrate from HDFS to S3 in your project by changing every occurence of 'hdfs://' by 's3a://':
-
+To migrate from HDFS to S3 in your project by changing every occurrence of 'hdfs://' to 's3a://':
 ```python
-
+#example.py
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
@@ -173,7 +227,7 @@ spark.stop()
 ```
 An annotator can find every spark.read you have:
 
-```python 
+```python
 from annotators.common.abstract_annotator import AbstractAnnotator
 from annotators.common.annotation import Annotation
 from annotators.common.search import findAll
@@ -199,22 +253,18 @@ class SparkReadParquetAnnotator(AbstractAnnotator):
             )
 ```
 
-
-Then with the **Devlens** replace command, you can change every occurence directly in your terminal 
-
+Then with the **Devlens** replace command, you can change every occurrence directly in your terminal:
 
 ![replace](/../static/img/example/replace.png?raw=true "replace")
-
 
 Then you can check on your code:
 
 ```python
-
+#example.py
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 spark = SparkSession.builder.getOrCreate()
-
 
 expected_df = (
     spark.read.parquet("s3a://finance/pib/expected/")
@@ -226,7 +276,3 @@ actual_df = (
     .withColumn("year", F.year("date"))
 )
 ```
-
-
-
-

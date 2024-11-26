@@ -36,10 +36,11 @@ The replacement Statement take 3 parameter separated by `||`.
 - The third parameter is the replacement logic
 
 
-## classic mode
+## command mode
 
-If you  want to use the classic mod, you can use the `--replace` flag, followed by the full instruction of replacement: 
+If you  want to use the command mode, you can use the `--replace` flag, followed by the full instruction of replacement: 
 
 ```bash
-python main.py query "SELECT * FROM annotation WHERE name='Table_Env'" --replace "value || '_MAIN' || SUBSTR(original, 4)"
+python main.py query "SELECT * FROM annotation WHERE name='Table_Env'" \
+--replace "value || '_MAIN' || SUBSTR(original, 4)"
 ```

@@ -1,11 +1,10 @@
 # Dataiku
 
-# Dataiku project variables
+# Dataiku Project Variables
 
+**Devlens** can retrieve your [project variables](https://doc.dataiku.com/dss/latest/variables/index.html) directly from your cloud easily:
 
-**Devlens** can retreive your projects variables directly from your cloud easily:
+- Each time you initiate a Dataiku analysis, **Devlens** will check if there are any project variables available.
+- Then an annotator can use the values to perform any process you want.
 
-- Each time you initiate a dataiku analyze , **Devlens** will check if there is any Project variables availables.
-- Then an annotator can use the values to do any process you want.
-
-For example, the `ENV VAR IN TABLE NAME` annotators is able to annotate any portion of SQL clause where there is a Environnement variables in the table name. It will give you the value of that variables directly in the annotation
+For example, the `ENV VAR IN TABLE NAME` annotator is able to annotate any portion of an SQL clause where there is an environment variable in the table name. It will give you the value of that variable directly in the annotation.

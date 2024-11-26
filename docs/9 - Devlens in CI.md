@@ -1,10 +1,10 @@
 # Devlens in CI
+***GITHUB ACTION IN PROGRESS***
 
-One of the use of **DEVLENS** is to be a part of your project CI. **DEVLENS** can provide you quick checks really useful if you want
-to be sure your team is following code rules.
+One of the uses of **DEVLENS** is to be a part of your project's CI. **DEVLENS** can provide you with quick checks that are really useful if you want to ensure your team is following code rules.
 
+Here is an example of how to use **DEVLENS** directly from our release. You can also download Devlens and use it from your project root.
 
-Here is an example of how to use **DEVLENS** directly from our release. You can also download devlens and use it from your project root.
 
 ## Example CI
 
@@ -29,7 +29,7 @@ jobs:
         # Make sure to specify the right version and dist of the release you want and also the right.
         - name: Download Devlens release
         run: |
-            version="0.3.0"
+            version="0.3.4"
             curl -s https://api.github.com/repos/soma-smart/dev-devlens-cli/releases/latest \
             | jq -r '.assets[] | select(.name | contains("ubuntu-latest-3.12.tar.gz")) | .browser_download_url' \
             | xargs -n 1 curl -L -o devlens.tar.gz

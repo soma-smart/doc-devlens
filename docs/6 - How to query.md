@@ -1,23 +1,19 @@
 # How to query
 
-**DEVLENS** provide a easy and nice way to query and check results directly through in your terminal.
+**DEVLENS** provides an easy and nice way to query and check results directly through your terminal.
 
-## interactive mode
-After the analyze, you can query your Annotations directly from you terminal :
+## Interactive mode
+After the analysis, you can query your annotations directly from your terminal:
 
 ![query](/../static/img/query/query.png?raw=true "query")
 
+## Command mode
 
-## classic mode
-
-If you prefer to use the `Classic mode` (We won't be mad if you do :) ), you can execute directly the `query` command :
+If you prefer to use the `command mode`, you can execute the `query` command directly:
 
 ```bash
-./devlens query "SELECT value from annotation Where name='Import'"
+./devlens query "SELECT value FROM annotation WHERE name='Import'"
 ```
-This command will result on a output directly on the terminal.
+This command will result in an output directly on the terminal.
 
-![classic](/../static/img/query/classic.png?raw=true "classic")
-
-
-
+![command](/../static/img/query/classic.png?raw=true "command")
