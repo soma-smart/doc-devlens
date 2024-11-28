@@ -55,14 +55,25 @@ To see the command mode you can simply execute:
 
 ### Query
 ```bash
-./devlens query "SELECT ...."
+./devlens query "SELECT ..."
 ```
 ### Replace
+
+
 ```bash
-python main.py replace downloads/ \
-"SELECT * FROM annotation WHERE name='Table_Env'" \
---replace "value || 'replacement' || logic"
+./devlens replace yourpath/ 
+--query "SELECT * FROM ..." \
+--replace-type yourtype \
+--replace-logic yourlogic \
 ```
+- **`path`**: The path to the directory or file to analyze and perform replacements.
+- **`--query`**: The SQL query to select the annotations to replace.
+- **`--replace-type`**: The type of replacement to perform. Options are:
+  - `simple`: Perform a straightforward string replacement.
+  - `logic`: Perform a replacement based on SQL logic.
+- **`--replace-pattern`**: The pattern to search for in simple replacements.
+- **`--replace-value`**: The value to replace the pattern with in simple replacements.
+- **`--replace-logic`**: The SQL logic for dynamic replacements.
 ## Make DEVLENS globally available
 
 If you want to use devlens anywhere on your machine, you might want to make it available globally:
