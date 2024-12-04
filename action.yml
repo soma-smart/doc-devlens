@@ -1,0 +1,29 @@
+name: "setup-devlens"
+description: "download and extract Devlens"
+author: "Soma <https://github.com/soma-smart>"
+inputs:
+  version:
+    description: "Version of Devlens to use"
+    required: false
+    default: "latest"
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download Devlens release
+      shell: bash
+      run: |
+        version="${{ inputs.version }}"
+        curl -s https://api.github.com/repos/soma-smart/doc-devlens/releases/latest \
+        | jq -r '.assets[] | select(.name | contains("ubuntu-latest-3.12.tar.gz")) | .browser_download_url' \
+        | xargs -n 1 curl -L -o devlens.tar.gz
+
+    - name: Extract Devlens
+      shell: bash
+      run: tar -xzvf devlens.tar.gz
+
+    - name: Make Devlens executable
+      shell: bash
+      run: chmod +x devlens
