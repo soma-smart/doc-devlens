@@ -6,6 +6,13 @@ The `replace` command in our tool allows you to perform replacements in your cod
 
 A simple replacement involves directly replacing a specified pattern with a new value. This is useful for straightforward text substitutions.
 
+The logic replacement takes four flags:
+
+- **`--query`**: The query to filter your result by annotation.
+- **`--replace-type`**: Set with the value `simple`.
+- **`--replace-pattern`**: The value you want to change
+- **`--replace-value`**: The new value
+
 **Before:**
 
 ```sql
